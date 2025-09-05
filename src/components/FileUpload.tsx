@@ -6,14 +6,22 @@ interface FileUploadProps {
   onUpload: (url: string) => void
   accept?: string
   className?: string
+  maxSize?: number // in MB
+  description?: string
 }
 
-export default function FileUpload({ onUpload, accept = "image/*", className = "" }: FileUploadProps) {
+export default function FileUpload({ onUpload, accept = "image/*,video/*", className = "", maxSize = 50, description }: FileUploadProps) {
   const [uploading, setUploading] = useState(false)
   const [dragOver, setDragOver] = useState(false)
 
   const handleFileUpload = async (file: File) => {
     if (!file) return
+
+    // Validate file size
+    if (file.size > maxSize * 1024 * 1024) {
+      alert(`File size must be less than ${maxSize}MB`)
+      return
+    }
 
     setUploading(true)
     
@@ -30,10 +38,13 @@ export default function FileUpload({ onUpload, accept = "image/*", className = "
         const data = await response.json()
         onUpload(data.url)
       } else {
-        console.error('Upload failed')
+        const error = await response.json()
+        console.error('Upload failed:', error.error)
+        alert(`Upload failed: ${error.error}`)
       }
     } catch (error) {
       console.error('Upload error:', error)
+      alert('Upload failed. Please try again.')
     } finally {
       setUploading(false)
     }
@@ -91,7 +102,10 @@ export default function FileUpload({ onUpload, accept = "image/*", className = "
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
           </svg>
           <div className="text-gray-400 mb-2">
-            Drop files here or <span className="text-red-400">browse</span>
+            {description || `Drop ${accept.includes('video') ? 'images or videos' : 'files'} here or`} <span className="text-red-400">browse</span>
+          </div>
+          <div className="text-xs text-gray-500">
+            Max size: {maxSize}MB
           </div>
           <input
             type="file"

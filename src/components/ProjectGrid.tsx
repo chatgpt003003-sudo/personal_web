@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 
 interface Project {
@@ -55,12 +56,34 @@ const ProjectGrid = () => {
     )
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {projects.map((project) => (
-        <ProjectCard key={project.id} project={project} />
+    <motion.div 
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {projects.map((project, index) => (
+        <motion.div
+          key={project.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1 }}
+        >
+          <ProjectCard project={project} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   )
 }
 

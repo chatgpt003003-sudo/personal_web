@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import FileUpload from '@/components/FileUpload'
 
 export default function NewProjectPage() {
   const router = useRouter()
@@ -103,34 +104,75 @@ export default function NewProjectPage() {
             />
           </div>
 
-          {/* Image URL */}
+          {/* Image Upload */}
           <div className="mb-6">
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-300 mb-2">
-              Image URL
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Project Image
             </label>
-            <input
-              id="imageUrl"
-              type="url"
-              value={formData.imageUrl}
-              onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-              placeholder="https://example.com/image.jpg"
+            <FileUpload
+              accept="image/*"
+              onUpload={(url) => setFormData({ ...formData, imageUrl: url })}
+              maxSize={10}
+              description="Upload project thumbnail image"
             />
+            {formData.imageUrl && (
+              <div className="mt-2 p-2 bg-gray-800 rounded text-sm">
+                <span className="text-green-400">✓</span> Image uploaded successfully
+              </div>
+            )}
           </div>
 
-          {/* Video URL */}
+          {/* Video Upload */}
           <div className="mb-6">
-            <label htmlFor="videoUrl" className="block text-sm font-medium text-gray-300 mb-2">
-              Video URL
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Project Video (Optional)
             </label>
-            <input
-              id="videoUrl"
-              type="url"
-              value={formData.videoUrl}
-              onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-              placeholder="https://example.com/video.mp4"
+            <FileUpload
+              accept="video/*"
+              onUpload={(url) => setFormData({ ...formData, videoUrl: url })}
+              maxSize={100}
+              description="Upload project preview video"
             />
+            {formData.videoUrl && (
+              <div className="mt-2 p-2 bg-gray-800 rounded text-sm">
+                <span className="text-green-400">✓</span> Video uploaded successfully
+              </div>
+            )}
+          </div>
+
+          {/* Manual URL Inputs (Alternative) */}
+          <div className="mb-6 border-t border-gray-700 pt-6">
+            <h3 className="text-sm font-medium text-gray-300 mb-4">Or enter URLs manually:</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-300 mb-2">
+                  Image URL
+                </label>
+                <input
+                  id="imageUrl"
+                  type="url"
+                  value={formData.imageUrl}
+                  onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                  className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  placeholder="https://example.com/image.jpg"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="videoUrl" className="block text-sm font-medium text-gray-300 mb-2">
+                  Video URL
+                </label>
+                <input
+                  id="videoUrl"
+                  type="url"
+                  value={formData.videoUrl}
+                  onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
+                  className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  placeholder="https://example.com/video.mp4"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Tags */}
