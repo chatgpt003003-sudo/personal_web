@@ -1,53 +1,53 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface Project {
-  id: string
-  title: string
-  description: string | null
-  imageUrl: string | null
-  published: boolean
-  createdAt: string
+  id: string;
+  title: string;
+  description: string | null;
+  imageUrl: string | null;
+  published: boolean;
+  createdAt: string;
 }
 
 export default function AdminDashboard() {
-  const [projects, setProjects] = useState<Project[]>([])
+  const [projects, setProjects] = useState<Project[]>([]);
   const [stats, setStats] = useState({
     total: 0,
     published: 0,
-    drafts: 0
-  })
-  const [loading, setLoading] = useState(true)
+    drafts: 0,
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProjects()
-  }, [])
+    fetchProjects();
+  }, []);
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('/api/admin/projects')
+      const response = await fetch('/api/admin/projects');
       if (response.ok) {
-        const data = await response.json()
-        setProjects(data)
-        
-        const published = data.filter((p: Project) => p.published).length
+        const data = await response.json();
+        setProjects(data);
+
+        const published = data.filter((p: Project) => p.published).length;
         setStats({
           total: data.length,
           published,
-          drafts: data.length - published
-        })
+          drafts: data.length - published,
+        });
       }
     } catch (error) {
-      console.error('Error fetching projects:', error)
+      console.error('Error fetching projects:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   if (loading) {
-    return <div className="text-center py-8">Loading dashboard...</div>
+    return <div className="text-center py-8">Loading dashboard...</div>;
   }
 
   return (
@@ -60,16 +60,22 @@ export default function AdminDashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-300">Total Projects</h3>
+          <h3 className="text-lg font-semibold text-gray-300">
+            Total Projects
+          </h3>
           <p className="text-3xl font-bold text-white mt-2">{stats.total}</p>
         </div>
         <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
           <h3 className="text-lg font-semibold text-gray-300">Published</h3>
-          <p className="text-3xl font-bold text-green-400 mt-2">{stats.published}</p>
+          <p className="text-3xl font-bold text-green-400 mt-2">
+            {stats.published}
+          </p>
         </div>
         <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
           <h3 className="text-lg font-semibold text-gray-300">Drafts</h3>
-          <p className="text-3xl font-bold text-yellow-400 mt-2">{stats.drafts}</p>
+          <p className="text-3xl font-bold text-yellow-400 mt-2">
+            {stats.drafts}
+          </p>
         </div>
       </div>
 
@@ -96,17 +102,25 @@ export default function AdminDashboard() {
       <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Recent Projects</h2>
-          <Link href="/admin/projects" className="text-red-400 hover:text-red-300">
+          <Link
+            href="/admin/projects"
+            className="text-red-400 hover:text-red-300"
+          >
             View All
           </Link>
         </div>
-        
+
         {projects.length === 0 ? (
-          <p className="text-gray-400">No projects yet. Create your first project!</p>
+          <p className="text-gray-400">
+            No projects yet. Create your first project!
+          </p>
         ) : (
           <div className="space-y-3">
-            {projects.slice(0, 5).map((project) => (
-              <div key={project.id} className="flex items-center justify-between p-3 bg-gray-800 rounded">
+            {projects.slice(0, 5).map(project => (
+              <div
+                key={project.id}
+                className="flex items-center justify-between p-3 bg-gray-800 rounded"
+              >
                 <div className="flex-1">
                   <h3 className="font-semibold">{project.title}</h3>
                   <p className="text-sm text-gray-400">
@@ -114,11 +128,13 @@ export default function AdminDashboard() {
                   </p>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className={`px-2 py-1 rounded text-xs ${
-                    project.published 
-                      ? 'bg-green-600 text-green-100' 
-                      : 'bg-yellow-600 text-yellow-100'
-                  }`}>
+                  <span
+                    className={`px-2 py-1 rounded text-xs ${
+                      project.published
+                        ? 'bg-green-600 text-green-100'
+                        : 'bg-yellow-600 text-yellow-100'
+                    }`}
+                  >
                     {project.published ? 'Published' : 'Draft'}
                   </span>
                   <Link
@@ -134,5 +150,5 @@ export default function AdminDashboard() {
         )}
       </div>
     </div>
-  )
+  );
 }

@@ -1,59 +1,64 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import ProjectCard from './ProjectCard'
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import ProjectCard from './ProjectCard';
 
 interface Project {
-  id: string
-  title: string
-  description: string | null
-  imageUrl: string | null
-  videoUrl: string | null
-  metadata: string | null
-  published: boolean
-  createdAt: Date
-  updatedAt: Date
+  id: string;
+  title: string;
+  description: string | null;
+  imageUrl: string | null;
+  videoUrl: string | null;
+  metadata: string | null;
+  published: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const ProjectGrid = () => {
-  const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProjects()
-  }, [])
+    fetchProjects();
+  }, []);
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('/api/projects')
+      const response = await fetch('/api/projects');
       if (response.ok) {
-        const data = await response.json()
-        setProjects(data)
+        const data = await response.json();
+        setProjects(data);
       }
     } catch (error) {
-      console.error('Error fetching projects:', error)
+      console.error('Error fetching projects:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   if (loading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="aspect-video bg-gray-800 rounded-lg animate-pulse" />
+          <div
+            key={i}
+            className="aspect-video bg-gray-800 rounded-lg animate-pulse"
+          />
         ))}
       </div>
-    )
+    );
   }
 
   if (projects.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-400 text-lg">No projects found. Create your first project to get started!</p>
+        <p className="text-gray-400 text-lg">
+          No projects found. Create your first project to get started!
+        </p>
       </div>
-    )
+    );
   }
 
   const containerVariants = {
@@ -61,13 +66,13 @@ const ProjectGrid = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
   return (
-    <motion.div 
+    <motion.div
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
       variants={containerVariants}
       initial="hidden"
@@ -84,7 +89,7 @@ const ProjectGrid = () => {
         </motion.div>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export default ProjectGrid
+export default ProjectGrid;

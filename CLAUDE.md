@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 This is a Netflix-style personal portfolio website project with the following key features:
+
 - Dynamic content management for projects with video previews
 - Dual-mode chatbot (decision tree + AI with RAG)
 - Blog functionality
@@ -13,18 +14,21 @@ This is a Netflix-style personal portfolio website project with the following ke
 ## Tech Stack & Architecture
 
 ### Core Framework
+
 - **Next.js 14** (App Router) - Full-stack React framework
 - **TypeScript** - Type safety throughout
 - **Tailwind CSS + shadcn/ui** - Styling and UI components
 - **Framer Motion** - Animations and hover effects
 
 ### Database & Backend
+
 - **SQLite** (development) → **PostgreSQL** on AWS RDS with **pgvector** (production)
 - **Prisma ORM** - Type-safe database operations
 - **NextAuth.js** - Email/password authentication for admin access
 - **AWS S3** - Media file storage (Phase 3)
 
 ### AI/Chatbot System (Phase 4)
+
 - **OpenAI API** (GPT-3.5-turbo) for AI mode
 - **Custom decision tree** engine with JSON configuration
 - **RAG pipeline** using PostgreSQL pgvector for knowledge base
@@ -97,26 +101,31 @@ npx prisma migrate deploy
 ## Critical Implementation Details
 
 ### Netflix-Style Hover Preview
+
 - Video auto-play on hover with Framer Motion scaling
 - Mobile tap-to-preview fallback
 - Performance optimization for video loading
 
 ### Dynamic Metadata System
+
 - JSONB field in Project model allows flexible field types
 - Admin interface dynamically renders metadata forms
 - Supports tech stack, duration, client, and custom fields
 
 ### Dual-Mode Chatbot
+
 - Decision tree mode: JSON-configured conversation flows
 - AI mode: RAG-enhanced responses using embedded knowledge base
 - Seamless switching between modes during conversation
 
 ### RAG Pipeline
+
 - PostgreSQL pgvector for similarity search
 - OpenAI embeddings for knowledge base content
 - Context-aware AI responses using retrieved documents
 
 ### AWS Integration
+
 - S3 for media storage with CloudFront CDN
 - RDS PostgreSQL with pgvector extension
 - EC2 deployment with PM2 process management
@@ -133,24 +142,28 @@ npx prisma migrate deploy
 ## Implementation Phases
 
 ### Phase 1: Core Layout & Foundation
+
 - Next.js 14 setup with TypeScript, Tailwind CSS, shadcn/ui
 - Netflix-style grid layout with placeholder content
 - Basic ProjectGrid and ProjectCard components
 - SQLite database with Prisma
 
-### Phase 2: Database & CRUD System  
+### Phase 2: Database & CRUD System
+
 - NextAuth.js email/password authentication
 - Protected admin routes and basic dashboard
 - Simple project CRUD operations
 - Local media storage
 
 ### Phase 3: AWS Integration
+
 - AWS CLI configuration and setup
 - PostgreSQL RDS with pgvector extension
 - S3 media storage and upload functionality
 - Database migration from SQLite to PostgreSQL
 
 ### Phase 4: Advanced Features
+
 - Video auto-play and hover animations
 - Dual-mode chatbot system
 - Blog functionality
