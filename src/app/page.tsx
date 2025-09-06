@@ -1,4 +1,5 @@
 import ProjectGrid from '@/components/ProjectGrid';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -6,13 +7,16 @@ export default function Home() {
       <header className="px-6 py-4 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-red-600">Portfolio</h1>
         <nav className="flex space-x-6">
-          <a href="#" className="hover:text-gray-300">
+          <Link href="/" className="hover:text-gray-300">
             Home
-          </a>
-          <a href="#" className="hover:text-gray-300">
+          </Link>
+          <Link href="/blog" className="hover:text-gray-300">
+            Blog
+          </Link>
+          <a href="#about" className="hover:text-gray-300">
             About
           </a>
-          <a href="#" className="hover:text-gray-300">
+          <a href="#contact" className="hover:text-gray-300">
             Contact
           </a>
         </nav>
