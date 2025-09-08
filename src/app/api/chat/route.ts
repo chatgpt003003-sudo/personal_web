@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     }
 
     let responseMessage: string;
-    let options: Record<string, string>[] = [];
+    let options: unknown[] = [];
     let nextNodeId: string | undefined;
     let newMode = mode;
 

@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import {
-  createRateLimit,
-  addSecurityHeaders,
-} from '@/lib/security';
+import { createRateLimit, addSecurityHeaders } from '@/lib/security';
 
 // Rate limiting for public blog access
 const blogRateLimit = createRateLimit({
@@ -27,7 +24,7 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const whereClause: any = {
+    const whereClause: Record<string, unknown> = {
       published: true,
     };
 

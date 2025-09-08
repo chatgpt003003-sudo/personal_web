@@ -78,14 +78,11 @@ export const metadata: Metadata = {
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
-    other: [
-      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#000000' },
-    ],
   },
   manifest: '/manifest.json',
+  metadataBase: new URL(process.env.NEXTAUTH_URL || 'http://localhost:3000'),
   alternates: {
-    canonical: process.env.NEXTAUTH_URL || 'https://localhost:3000',
+    canonical: process.env.NEXTAUTH_URL || 'http://localhost:3000',
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
@@ -126,14 +123,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
 
-        {/* Preload critical assets */}
-        <link
-          rel="preload"
-          href="/fonts/inter-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin=""
-        />
+        {/* Preload critical assets - removed missing font */}
 
         {/* Critical CSS inline for above-the-fold content */}
         <style

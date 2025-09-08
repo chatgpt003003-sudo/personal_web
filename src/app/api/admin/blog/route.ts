@@ -79,7 +79,11 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching blog posts:', error);
     logSecurityEvent(
       'DATABASE_ERROR',
-      { endpoint: '/api/admin/blog', method: 'GET', error: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        endpoint: '/api/admin/blog',
+        method: 'GET',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
       request.headers.get('x-forwarded-for') || '127.0.0.1'
     );
 
@@ -121,7 +125,7 @@ export async function POST(request: NextRequest) {
     let body;
     try {
       body = await request.json();
-    } catch (error) {
+    } catch {
       return addSecurityHeaders(
         NextResponse.json(
           { error: 'Invalid JSON in request body' },
@@ -131,7 +135,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate input
-    const validation: ValidationResult = sanitizeAndValidate(body, blogPostCreateSchema);
+    const validation: ValidationResult = sanitizeAndValidate(
+      body,
+      blogPostCreateSchema
+    );
 
     if (!validation.isValid) {
       logSecurityEvent(
@@ -152,21 +159,24 @@ export async function POST(request: NextRequest) {
     }
 
     const { title, slug, content, excerpt, tags, published, featuredImage } =
-      validation.data as { 
-        title: string; 
-        slug?: string; 
-        content: string; 
-        excerpt?: string; 
-        tags?: string[]; 
-        published?: boolean; 
+      validation.data as {
+        title: string;
+        slug?: string;
+        content: string;
+        excerpt?: string;
+        tags?: string[];
+        published?: boolean;
         featuredImage?: string;
       };
 
     // Generate slug if not provided
-    const blogSlug = slug || title.toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .trim('-');
+    const blogSlug =
+      slug ||
+      title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/^-+|-+$/g, '');
 
     // Check if slug already exists
     const existingPost = await prisma.blogPost.findUnique({

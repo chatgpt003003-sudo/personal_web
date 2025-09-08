@@ -12,14 +12,16 @@ export interface ProcessedMarkdown {
     tags?: string[];
     featuredImage?: string;
     publishedAt?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 
-export async function processMarkdown(markdown: string): Promise<ProcessedMarkdown> {
+export async function processMarkdown(
+  markdown: string
+): Promise<ProcessedMarkdown> {
   // Parse frontmatter
   const matterResult = matter(markdown);
-  
+
   // Process markdown to HTML
   const processedContent = await remark()
     .use(remarkGfm) // GitHub Flavored Markdown
@@ -66,7 +68,7 @@ export function extractExcerpt(content: string, length: number = 200): string {
 
   // If no sentence end found, find the last word boundary
   const lastSpace = truncated.lastIndexOf(' ');
-  return lastSpace > length * 0.6 
+  return lastSpace > length * 0.6
     ? truncated.substring(0, lastSpace).trim() + '...'
     : truncated.trim() + '...';
 }
@@ -88,14 +90,14 @@ export function estimateReadingTime(content: string): number {
     .replace(/<[^>]*>/g, '') // Remove HTML tags
     .split(/\s+/)
     .filter(word => word.length > 0).length;
-  
+
   return Math.ceil(words / wordsPerMinute);
 }
 
-export function generateTableOfContents(content: string): Array<{ 
-  id: string; 
-  title: string; 
-  level: number; 
+export function generateTableOfContents(content: string): Array<{
+  id: string;
+  title: string;
+  level: number;
 }> {
   const headings: Array<{ id: string; title: string; level: number }> = [];
   const headingRegex = /^(#{1,6})\s+(.+)$/gm;
@@ -105,7 +107,7 @@ export function generateTableOfContents(content: string): Array<{
     const level = match[1].length;
     const title = match[2].trim();
     const id = generateSlug(title);
-    
+
     headings.push({ id, title, level });
   }
 
@@ -128,7 +130,7 @@ export function validateMarkdown(content: string): {
   const warnings: string[] = [];
 
   // Check for common markdown issues
-  
+
   // Unmatched code blocks
   const codeBlockMatches = content.match(/```/g);
   if (codeBlockMatches && codeBlockMatches.length % 2 !== 0) {
@@ -172,7 +174,10 @@ export function validateMarkdown(content: string): {
 }
 
 // SEO-related markdown utilities
-export function extractMetaDescription(content: string, fallbackExcerpt?: string): string {
+export function extractMetaDescription(
+  content: string,
+  fallbackExcerpt?: string
+): string {
   // Try to extract the first paragraph as meta description
   const firstParagraph = content
     .split('\n\n')[0]
@@ -184,10 +189,14 @@ export function extractMetaDescription(content: string, fallbackExcerpt?: string
     return extractExcerpt(firstParagraph, 160);
   }
 
-  return fallbackExcerpt ? extractExcerpt(fallbackExcerpt, 160) : 'Read this blog post to learn more.';
+  return fallbackExcerpt
+    ? extractExcerpt(fallbackExcerpt, 160)
+    : 'Read this blog post to learn more.';
 }
 
-export function extractImages(content: string): Array<{ url: string; alt: string }> {
+export function extractImages(
+  content: string
+): Array<{ url: string; alt: string }> {
   const images: Array<{ url: string; alt: string }> = [];
   const imagePattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
   let match;

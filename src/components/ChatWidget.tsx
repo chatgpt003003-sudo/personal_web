@@ -94,7 +94,7 @@ export default function ChatWidget() {
         }
 
         const requestBody: Record<string, string | undefined> = {
-          conversationId,
+          conversationId: conversationId || undefined,
           mode,
         };
 

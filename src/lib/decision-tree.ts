@@ -20,8 +20,23 @@ export interface DecisionTreeResponse {
   shouldHandoffToAI?: boolean;
 }
 
+interface ChatbotTreeNode {
+  id: string;
+  message: string;
+  type: string;
+  options: TreeOption[];
+}
+
+interface ChatbotTree {
+  id: string;
+  message: string;
+  type: string;
+  options: TreeOption[];
+  nodes: Record<string, ChatbotTreeNode>;
+}
+
 export class DecisionTreeEngine {
-  private tree: Record<string, unknown>;
+  private tree: ChatbotTree;
 
   constructor() {
     this.tree = chatbotTree;
@@ -29,10 +44,10 @@ export class DecisionTreeEngine {
 
   getStartingNode(): TreeNode {
     return {
-      id: this.tree.id,
-      message: this.tree.message,
-      type: this.tree.type,
-      options: this.tree.options,
+      id: this.tree.id as string,
+      message: this.tree.message as string,
+      type: this.tree.type as 'multiple_choice' | 'ai_handoff',
+      options: this.tree.options as TreeOption[],
     };
   }
 
@@ -95,7 +110,7 @@ export class DecisionTreeEngine {
   private getErrorResponse(): DecisionTreeResponse {
     return {
       message: "I'm sorry, I didn't understand that choice. Let me start over.",
-      options: this.tree.options,
+      options: this.tree.options as TreeOption[],
       nextNodeId: 'welcome',
     };
   }
@@ -103,10 +118,10 @@ export class DecisionTreeEngine {
   getNodeById(nodeId: string): TreeNode | null {
     if (nodeId === 'welcome') {
       return {
-        id: this.tree.id,
-        message: this.tree.message,
-        type: this.tree.type,
-        options: this.tree.options,
+        id: this.tree.id as string,
+        message: this.tree.message as string,
+        type: this.tree.type as 'multiple_choice' | 'ai_handoff',
+        options: this.tree.options as TreeOption[],
       };
     }
 
@@ -114,10 +129,10 @@ export class DecisionTreeEngine {
     if (!node) return null;
 
     return {
-      id: node.id,
-      message: node.message,
-      type: node.type,
-      options: node.options,
+      id: node.id as string,
+      message: node.message as string,
+      type: node.type as 'multiple_choice' | 'ai_handoff',
+      options: node.options as TreeOption[],
     };
   }
 }
