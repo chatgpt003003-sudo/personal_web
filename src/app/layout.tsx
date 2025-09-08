@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import { DefaultSeo } from 'next-seo';
 import { Providers } from './providers';
-import { defaultSEO } from '@/lib/seo';
-import { PerformanceMonitor } from '@/components/PerformanceMonitor';
+import ChatWidget from '@/components/ChatWidget';
 import './globals.css';
 
 // Optimized font loading
@@ -80,9 +78,7 @@ export const metadata: Metadata = {
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180' },
-    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
     other: [
       { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#000000' },
     ],
@@ -120,12 +116,16 @@ export default function RootLayout({
       <head>
         {/* Preconnect to external domains for better performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+
         {/* DNS prefetch for likely third-party domains */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
-        
+
         {/* Preload critical assets */}
         <link
           rel="preload"
@@ -134,10 +134,11 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin=""
         />
-        
+
         {/* Critical CSS inline for above-the-fold content */}
-        <style dangerouslySetInnerHTML={{
-          __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             body { 
               margin: 0; 
               font-family: var(--font-inter), system-ui, sans-serif;
@@ -156,9 +157,10 @@ export default function RootLayout({
             @keyframes spin {
               to { transform: rotate(360deg); }
             }
-          `
-        }} />
-        
+          `,
+          }}
+        />
+
         {/* Structured data for the main site */}
         <script
           type="application/ld+json"
@@ -185,7 +187,7 @@ export default function RootLayout({
             }),
           }}
         />
-        
+
         {/* Google Analytics (if configured) */}
         {process.env.GA_TRACKING_ID && (
           <>
@@ -210,12 +212,6 @@ export default function RootLayout({
         )}
       </head>
       <body className="antialiased">
-        {/* Default SEO configuration */}
-        <DefaultSeo {...defaultSEO} />
-        
-        {/* Performance monitoring in production */}
-        {process.env.NODE_ENV === 'production' && <PerformanceMonitor />}
-        
         {/* Skip to main content for accessibility */}
         <a
           href="#main"
@@ -223,13 +219,14 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        
+
         <Providers>
           <main id="main" className="min-h-screen">
             {children}
           </main>
+          <ChatWidget />
         </Providers>
-        
+
         {/* Service Worker registration for PWA */}
         {process.env.NODE_ENV === 'production' && (
           <script

@@ -97,3 +97,41 @@ model BlogPostTag {
   
   @@unique([blogPostId, tagId])
 }
+
+// Chat system models
+model ChatConversation {
+  id          String   @id @default(cuid())
+  sessionId   String   @unique
+  userId      String?  // Optional user identification
+  context     String?  // JSON context about user's page/behavior
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  messages    ChatMessage[]
+}
+
+model ChatMessage {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String   // 'user' | 'assistant' | 'system'
+  content        String
+  messageType    String   @default("text") // 'text' | 'quick_reply' | 'decision_tree'
+  metadata       String?  // JSON for additional data
+  timestamp      DateTime @default(now())
+  
+  // Relations
+  conversation   ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+model KnowledgeBase {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  source      String   // 'project' | 'blog' | 'manual'
+  sourceId    String?  // Reference to original content
+  embedding   String?  // JSON array of embedding vector
+  metadata    String?  // JSON for additional context
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

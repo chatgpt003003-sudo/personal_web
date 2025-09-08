@@ -37,8 +37,21 @@ export default function AdminLayout({
 
   const navigation = [
     { name: 'Dashboard', href: '/admin', current: pathname === '/admin' },
-    { name: 'Projects', href: '/admin/projects', current: pathname.startsWith('/admin/projects') },
-    { name: 'Blog', href: '/admin/blog', current: pathname.startsWith('/admin/blog') },
+    {
+      name: 'Projects',
+      href: '/admin/projects',
+      current: pathname.startsWith('/admin/projects'),
+    },
+    {
+      name: 'Blog',
+      href: '/admin/blog',
+      current: pathname.startsWith('/admin/blog'),
+    },
+    {
+      name: 'Chatbot',
+      href: '/admin/chatbot',
+      current: pathname.startsWith('/admin/chatbot'),
+    },
   ];
 
   return (
@@ -50,10 +63,10 @@ export default function AdminLayout({
               <h1 className="text-xl font-bold text-red-600">
                 Admin Dashboard
               </h1>
-              
+
               {/* Navigation Links */}
               <nav className="flex space-x-4">
-                {navigation.map((item) => (
+                {navigation.map(item => (
                   <Link
                     key={item.name}
                     href={item.href}
@@ -68,7 +81,7 @@ export default function AdminLayout({
                 ))}
               </nav>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <Link
                 href="/blog"

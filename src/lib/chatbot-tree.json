@@ -1,0 +1,353 @@
+{
+  "id": "welcome",
+  "message": "👋 Hi! I'm here to help you learn more about this portfolio. What would you like to know?",
+  "type": "multiple_choice",
+  "options": [
+    {
+      "text": "About the projects",
+      "value": "projects",
+      "nextId": "projects_info"
+    },
+    {
+      "text": "Technical skills & experience",
+      "value": "skills",
+      "nextId": "skills_info"
+    },
+    {
+      "text": "How to get in touch",
+      "value": "contact",
+      "nextId": "contact_info"
+    },
+    {
+      "text": "Ask anything else",
+      "value": "ai_mode",
+      "nextId": "ai_handoff"
+    }
+  ],
+  "nodes": {
+    "projects_info": {
+      "id": "projects_info",
+      "message": "Great! I can tell you about the projects showcased here. What interests you most?",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Show me featured projects",
+          "value": "featured",
+          "nextId": "featured_projects"
+        },
+        {
+          "text": "What technologies were used?",
+          "value": "tech_stack",
+          "nextId": "tech_stack_info"
+        },
+        {
+          "text": "Development approach",
+          "value": "approach",
+          "nextId": "development_approach"
+        },
+        {
+          "text": "Back to main menu",
+          "value": "back",
+          "nextId": "welcome"
+        }
+      ]
+    },
+    "featured_projects": {
+      "id": "featured_projects",
+      "message": "Here are some highlighted projects:\n\n• **Netflix-Style Portfolio** - This very website! Built with Next.js 14, featuring hover animations and AWS integration\n• **AI Chatbot System** - Dual-mode chatbot with decision trees and RAG pipeline\n• **Admin Dashboard** - Complete content management system with authentication\n\nWould you like to know more about any specific project or explore the live demos?",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "More about the portfolio site",
+          "value": "portfolio_details",
+          "nextId": "portfolio_details"
+        },
+        {
+          "text": "Technical implementation",
+          "value": "tech_details",
+          "nextId": "tech_stack_info"
+        },
+        {
+          "text": "Ask about something else",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        }
+      ]
+    },
+    "portfolio_details": {
+      "id": "portfolio_details",
+      "message": "This portfolio website features:\n\n🎬 **Netflix-style Interface** - Hover effects, video previews, and smooth animations\n🔐 **Admin Dashboard** - Content management with NextAuth.js authentication\n☁️ **AWS Integration** - S3 storage, RDS PostgreSQL, and production deployment\n🤖 **AI Chatbot** - You're talking to it right now!\n🎨 **Modern Stack** - Next.js 14, TypeScript, Tailwind CSS, Framer Motion\n\nThe site demonstrates both frontend skills and full-stack capabilities including database design, API development, and cloud deployment.",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "How was it built?",
+          "value": "tech_stack",
+          "nextId": "tech_stack_info"
+        },
+        {
+          "text": "Explore other projects",
+          "value": "projects",
+          "nextId": "projects_info"
+        },
+        {
+          "text": "Ask me anything",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        }
+      ]
+    },
+    "skills_info": {
+      "id": "skills_info",
+      "message": "Here's an overview of the technical skills demonstrated in this portfolio:",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Frontend Development",
+          "value": "frontend",
+          "nextId": "frontend_skills"
+        },
+        {
+          "text": "Backend & Database",
+          "value": "backend",
+          "nextId": "backend_skills"
+        },
+        {
+          "text": "Cloud & DevOps",
+          "value": "devops",
+          "nextId": "devops_skills"
+        },
+        {
+          "text": "AI & Machine Learning",
+          "value": "ai",
+          "nextId": "ai_skills"
+        }
+      ]
+    },
+    "frontend_skills": {
+      "id": "frontend_skills",
+      "message": "**Frontend Expertise:**\n\n🚀 **React & Next.js 14** - App Router, Server Components, TypeScript\n🎨 **Modern CSS** - Tailwind CSS, shadcn/ui, responsive design\n✨ **Animations** - Framer Motion, hover effects, micro-interactions\n📱 **Mobile-First** - Responsive design, performance optimization\n🔧 **Developer Tools** - ESLint, Prettier, testing frameworks\n\nThe Netflix-style interface showcases advanced animation techniques and modern React patterns.",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Backend skills",
+          "value": "backend",
+          "nextId": "backend_skills"
+        },
+        {
+          "text": "See projects in action",
+          "value": "projects",
+          "nextId": "projects_info"
+        },
+        {
+          "text": "Ask something specific",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        }
+      ]
+    },
+    "backend_skills": {
+      "id": "backend_skills",
+      "message": "**Backend & Database Expertise:**\n\n🗄️ **Database Design** - PostgreSQL, SQLite, Prisma ORM\n🔐 **Authentication** - NextAuth.js, bcrypt, session management\n📡 **API Development** - RESTful APIs, validation, error handling\n🔍 **Vector Search** - pgvector for RAG pipeline, similarity search\n📊 **Data Modeling** - Relational design, JSONB for flexibility\n⚡ **Performance** - Query optimization, caching strategies\n\nThe admin system demonstrates full CRUD operations with secure authentication.",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Cloud & deployment",
+          "value": "devops",
+          "nextId": "devops_skills"
+        },
+        {
+          "text": "AI capabilities",
+          "value": "ai",
+          "nextId": "ai_skills"
+        },
+        {
+          "text": "Main menu",
+          "value": "back",
+          "nextId": "welcome"
+        }
+      ]
+    },
+    "devops_skills": {
+      "id": "devops_skills",
+      "message": "**Cloud & DevOps Skills:**\n\n☁️ **AWS Services** - S3, RDS, EC2, CloudFront CDN\n🐳 **Containerization** - Docker, production deployments\n🔄 **CI/CD** - GitHub Actions, automated testing and deployment\n📈 **Monitoring** - Performance tracking, error logging\n🛡️ **Security** - OWASP best practices, input validation, rate limiting\n🚀 **Performance** - Lighthouse optimization, Core Web Vitals\n\nThe site is production-ready with comprehensive security and performance measures.",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "AI & ML capabilities",
+          "value": "ai",
+          "nextId": "ai_skills"
+        },
+        {
+          "text": "See the projects",
+          "value": "projects",
+          "nextId": "projects_info"
+        },
+        {
+          "text": "Get in touch",
+          "value": "contact",
+          "nextId": "contact_info"
+        }
+      ]
+    },
+    "ai_skills": {
+      "id": "ai_skills",
+      "message": "**AI & Machine Learning Integration:**\n\n🤖 **OpenAI Integration** - GPT-3.5-turbo for conversational AI\n🔍 **RAG Pipeline** - Retrieval-Augmented Generation with vector search\n📊 **Embeddings** - text-embedding-ada-002 for semantic search\n🌳 **Decision Trees** - Rule-based conversation flows\n💭 **Natural Language** - Context-aware responses and intent recognition\n🔄 **Hybrid Approach** - Seamless switching between structured and AI modes\n\nThis chatbot demonstrates both traditional rule-based AI and modern LLM integration!",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "How does this chat work?",
+          "value": "chat_explanation",
+          "nextId": "chat_explanation"
+        },
+        {
+          "text": "Try AI mode now",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        },
+        {
+          "text": "Back to skills",
+          "value": "skills",
+          "nextId": "skills_info"
+        }
+      ]
+    },
+    "tech_stack_info": {
+      "id": "tech_stack_info",
+      "message": "**Tech Stack Overview:**\n\n**Frontend:** Next.js 14, React, TypeScript, Tailwind CSS, Framer Motion\n**Backend:** Node.js, Prisma ORM, NextAuth.js\n**Database:** PostgreSQL (production), SQLite (development)\n**Cloud:** AWS S3, RDS, EC2\n**AI:** OpenAI GPT-3.5-turbo, text-embedding-ada-002\n**Tools:** GitHub Actions, ESLint, Prettier, Jest\n\nThis demonstrates proficiency across the full development stack with modern best practices.",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Why these choices?",
+          "value": "tech_decisions",
+          "nextId": "tech_decisions"
+        },
+        {
+          "text": "See it in action",
+          "value": "projects",
+          "nextId": "projects_info"
+        },
+        {
+          "text": "Ask something else",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        }
+      ]
+    },
+    "tech_decisions": {
+      "id": "tech_decisions",
+      "message": "**Technology Decisions Explained:**\n\n🚀 **Next.js 14** - App Router for modern React, excellent SEO and performance\n📦 **TypeScript** - Type safety prevents bugs, improves developer experience  \n🎨 **Tailwind CSS** - Rapid styling, consistent design system\n✨ **Framer Motion** - Smooth animations that enhance user experience\n🗄️ **PostgreSQL** - Robust relational database with vector search capabilities\n☁️ **AWS** - Industry-standard cloud platform for scalability\n🤖 **OpenAI** - Best-in-class AI for natural language understanding\n\nEach choice balances performance, developer experience, and scalability.",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Explore the projects",
+          "value": "projects",
+          "nextId": "projects_info"
+        },
+        {
+          "text": "Development approach",
+          "value": "approach",
+          "nextId": "development_approach"
+        },
+        {
+          "text": "Switch to AI mode",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        }
+      ]
+    },
+    "development_approach": {
+      "id": "development_approach",
+      "message": "**Development Methodology:**\n\n📋 **Phased Development** - Incremental feature delivery\n🧪 **Test-Driven** - Comprehensive testing at all levels\n🔒 **Security-First** - OWASP guidelines, input validation\n📈 **Performance-Focused** - Lighthouse scores >90, Core Web Vitals\n📱 **Mobile-First** - Responsive design from the ground up\n♿ **Accessible** - WCAG compliance, semantic HTML\n🔄 **CI/CD Pipeline** - Automated testing and deployment\n\nThis demonstrates professional development practices and attention to quality.",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Technical deep dive",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        },
+        {
+          "text": "View the projects",
+          "value": "projects",
+          "nextId": "projects_info"
+        },
+        {
+          "text": "Contact information",
+          "value": "contact",
+          "nextId": "contact_info"
+        }
+      ]
+    },
+    "contact_info": {
+      "id": "contact_info",
+      "message": "📬 **Get In Touch:**\n\nI'd love to discuss potential opportunities or collaborations!\n\n📧 **Email** - Perfect for detailed discussions about projects or opportunities\n💼 **LinkedIn** - Connect professionally and view my complete work history\n🐙 **GitHub** - Explore the code behind this and other projects\n📄 **Resume/CV** - Download for a comprehensive overview\n\nFeel free to reach out with questions, project ideas, or just to say hello!",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "What kind of work interests you?",
+          "value": "work_interest",
+          "nextId": "work_interest"
+        },
+        {
+          "text": "Ask about availability",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        },
+        {
+          "text": "Back to main menu",
+          "value": "back",
+          "nextId": "welcome"
+        }
+      ]
+    },
+    "work_interest": {
+      "id": "work_interest",
+      "message": "**Areas of Interest:**\n\n🚀 **Full-Stack Development** - End-to-end web applications\n🤖 **AI Integration** - LLM applications, RAG systems, chatbots\n☁️ **Cloud Architecture** - AWS, scalable systems design\n📊 **Data-Driven Solutions** - Analytics, dashboards, automation\n🎨 **User Experience** - Interactive interfaces, animation, design systems\n🔧 **Developer Tools** - Productivity solutions, workflow optimization\n\nI'm passionate about creating efficient, user-friendly solutions that solve real problems!",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Discuss a project idea",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        },
+        {
+          "text": "Learn more about skills",
+          "value": "skills",
+          "nextId": "skills_info"
+        },
+        {
+          "text": "View project examples",
+          "value": "projects",
+          "nextId": "projects_info"
+        }
+      ]
+    },
+    "chat_explanation": {
+      "id": "chat_explanation",
+      "message": "**How This Chatbot Works:**\n\n🌳 **Decision Tree Mode** - What you're experiencing now! Pre-structured conversations for quick navigation\n🤖 **AI Mode** - Powered by OpenAI GPT with RAG (Retrieval-Augmented Generation)\n🔍 **Smart Context** - AI mode searches a knowledge base of projects, skills, and experience\n🔄 **Seamless Switching** - Move between modes based on your needs\n💾 **Persistent Memory** - Your conversation continues across sessions\n\nThe hybrid approach provides both quick answers and deep, contextual discussions!",
+      "type": "multiple_choice",
+      "options": [
+        {
+          "text": "Switch to AI mode now",
+          "value": "ai_mode",
+          "nextId": "ai_handoff"
+        },
+        {
+          "text": "Continue with guided chat",
+          "value": "back",
+          "nextId": "welcome"
+        },
+        {
+          "text": "Technical implementation details",
+          "value": "tech_stack",
+          "nextId": "tech_stack_info"
+        }
+      ]
+    },
+    "ai_handoff": {
+      "id": "ai_handoff",
+      "message": "🤖 **Switching to AI Mode**\n\nGreat! I'm now switching to AI-powered responses. This means I can:\n\n• Answer specific questions about projects and experience\n• Provide detailed technical explanations\n• Discuss your ideas and requirements\n• Have a more natural, conversational dialogue\n\nWhat would you like to know or discuss?",
+      "type": "ai_handoff",
+      "options": []
+    }
+  }
+}
